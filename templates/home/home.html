@@ -1,0 +1,164 @@
+{% extends 'home/base.html' %}
+{% block title %}Home - Programa de Gestão de Contratos{% endblock %}
+
+{% block content %}
+{% load static %}
+<main>
+    <header class="hero">
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+        <h1>Bem-vindo a Gestão de Contratos</h1>
+        <p>Uma gestão eficiente dos seus contratos.</p>
+        <a href="#benefits" class="cta-button">Saiba Mais</a>
+    </header>
+    
+    <section id="marketing" class="feature-section">
+        <h2>Funcionalidades Principais</h2>
+        <div class="features">
+            <div class="feature-item">
+                <img src="{% static 'images/feature1.png' %}" alt="Funcionalidade 1">
+                <h3>Gestão Simplificada</h3>
+                <p>Gerencie seus contratos com facilidade e eficiência.</p>
+            </div>
+            <div class="feature-item">
+                <img src="{% static 'images/feature2.png' %}" alt="Funcionalidade 2">
+                <h3>Relatórios em Tempo Real</h3>
+                <p>Tenha acesso a relatórios detalhados sempre que precisar.</p>
+            </div>
+            <div class="feature-item">
+                <img src="{% static 'images/feature3.png' %}" alt="Funcionalidade 3">
+                <h3>Colaboração Eficiente</h3>
+                <p>Trabalhe em equipe com ferramentas de colaboração integradas.</p>
+            </div>
+        </div>
+    </section>
+
+    <p class="td-p"> 📢 Tudo que seu negócio precisa está aqui! </p>
+    <p class="td2-p"> Melhor organização em seus contratos, com facilidade e autonomia. </p>
+
+    <section id="benefits" class="benefits-section">
+        <h2>Benefícios de Utilizar o Programa</h2>
+        <div class="benefit-list">
+            <div class="benefit-item">
+                <h3>✅ Redução de Custos</h3>
+                <p>Minimize os gastos operacionais com uma gestão eficiente.</p>
+            </div>
+            <div class="benefit-item">
+                <h3>✅ Acesso Rápido</h3>
+                <p>Informações acessíveis a qualquer momento.</p>
+            </div>
+            <div class="benefit-item">
+                <h3>✅ Melhoria na Colaboração</h3>
+                <p>Colabore com sua equipe sem dificuldades.</p>
+            </div>
+            <div class="benefit-item">
+                <h3>✅ Acompanhamento Eficiente</h3>
+                <p>Monitore prazos e obrigações em tempo real.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="demo-section">
+        <h2 class="dual-color-heading">Exemplos do Sistema</h2>
+        
+        <!-- Modal HTML -->
+        <div id="imageModal" class="modal" onclick="closeModal()">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <img id="modalImage" class="modal-content" alt="Imagem em tamanho maior">
+        </div>
+        
+        <div class="demo-item-container">
+            <div class="demo-item">
+                <img src="{% static 'images/demo1.png' %}" alt="Tela de exemplo 1" onclick="openModal(this.src)">
+            </div>
+            <div class="demo-text">
+                <h3>Gestão de Contratos</h3>
+                <p>Uma visão simplificada para gerenciar seus contratos de maneira eficiente e intuitiva, com todas as informações em um único lugar.</p>
+            </div>
+        </div>
+    
+        <div class="demo-item-container">
+            <div class="demo-item">
+                <img src="{% static 'images/demo2.png' %}" alt="Tela de exemplo 2" onclick="openModal(this.src)">
+            </div>
+            <div class="demo-text">
+                <h3>Relatórios Detalhados</h3>
+                <p>Obtenha relatórios completos e detalhados, gerando insights importantes para acompanhar o desempenho dos contratos.</p>
+            </div>
+        </div>
+    
+        <div class="demo-item-container">
+            <div class="demo-item">
+                <img src="{% static 'images/demo3.png' %}" alt="Tela de exemplo 3" onclick="openModal(this.src)">
+            </div>
+            <div class="demo-text">
+                <h3>Separação e organização</h3>
+                <p>Ferramentas de organização que permitem que sua equipe trabalhe com mais precisão e organização, aumentando a produtividade.</p>
+            </div>
+        </div>
+    
+
+    <section id="sobre-desenvolvedor" class="developer-section">
+        <h2>Sobre os Desenvolvedores</h2>
+        <div class="developer-info">
+            <img src="{% static 'images/desenvolvedor.jpeg' %}" alt="Foto do Desenvolvedor" class="developer-photo">
+            <div class="developer-description">
+                <p>Olá! Eu sou Victor Teixeira, o desenvolvedor deste programa de gestão de contratos.</p>
+            </div>
+        </div>
+        
+        <div class="idealista-info">
+            <img src="{% static 'images/lucas_navi.png' %}" alt="Foto do Idealista" class="idealista-photo">
+            <div class="idealista-description">
+                <p>Lucas Nave é o idealista deste projeto, trazendo uma visão inovadora para o gerenciamento de contratos.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Função para abrir o modal
+        function openModal(imgSrc) {
+            const modal = document.getElementById("imageModal");
+            const modalImage = document.getElementById("modalImage");
+            modalImage.src = imgSrc;
+            modal.style.display = "flex";
+        }
+    
+        // Função para fechar o modal
+        function closeModal() {
+            const modal = document.getElementById("imageModal");
+            modal.style.display = "none";
+        }
+
+        document.querySelector(".cta-button").addEventListener("mousemove", function(e) {
+            const button = e.currentTarget;
+            const rect = button.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+        
+            // Atualiza a posição do gradiente
+            button.style.setProperty('--x', `${x}px`);
+            button.style.setProperty('--y', `${y}px`);
+            button.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255, 255, 255, 0.3), rgba(0, 123, 255, 0) 60%)`;
+        });
+
+        // Função para alterar o fundo com base na posição do mouse
+        document.querySelector('.demo-section').addEventListener('mousemove', function(e) {
+            const section = e.currentTarget;
+            const rect = section.getBoundingClientRect();
+            const x = e.clientX - rect.left; // Posição X do mouse
+            const y = e.clientY - rect.top; // Posição Y do mouse
+        
+            // Muda o fundo em degradê baseado na posição do mouse
+            section.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(44, 62, 80, 0.8), rgba(0, 22, 68, 0.8) 60%)`;
+        });
+        
+        document.querySelector('.cta-button').addEventListener('click', function(e) {
+            e.preventDefault(); // Impede o comportamento padrão do link
+            const target = document.querySelector(this.getAttribute('href')); // Seleciona a seção de destino
+            target.scrollIntoView({ behavior: 'smooth' }); // Rola suavemente até a seção de destino
+        });
+        
+    </script>
+    
+</main>
+{% endblock %}

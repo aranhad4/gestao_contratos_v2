@@ -1,0 +1,12 @@
+{% extends 'home/base.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/upload_forn.css' %}">
+<h1>Upload de Arquivo Excel - Fornecedores</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enviar</button>
+</form>
+
+{% endblock %}

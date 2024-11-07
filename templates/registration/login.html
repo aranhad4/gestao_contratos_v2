@@ -1,0 +1,44 @@
+{% load static %}
+{% block content %}
+<head>
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+
+<div class="login-container">
+  <h2 class="planify-title">Portal de Contratos</h2>
+  {% if form.errors %}
+    <p>Seu nome de usuário e senha não coincidem. Por favor, tente novamente.</p>
+  {% endif %}
+
+  {% if next %}
+    {% if user.is_authenticated %}
+      <p>Sua conta não tem acesso a esta página. Para prosseguir, faça login com uma conta que tenha acesso.</p>
+    {% else %}
+      <p>Por favor, faça login para ver esta página.</p>
+    {% endif %}
+  {% endif %}
+
+  <form method="post" action="{% url 'login' %}" class="login-form">
+    {% csrf_token %}
+    <table>
+      <div class="form-group">
+      <tr>
+        <label >{{ form.username.label_tag }}</label >
+        <label >{{ form.username }}</label >
+      </tr>
+    </div>
+    <div class="form-group">
+      <tr>
+        <label >{{ form.password.label_tag }}</label >
+        <label >{{ form.password }}</label >
+      </tr>
+    </div>
+    </table>
+    <input type="submit" value="login" class="btn"/>
+    <input type="hidden" name="next" value="{{ next }}" />
+  </form>
+
+  <p class="password-reset"><a href="{% url 'password_reset' %}">Esqueceu a senha?</a></p>
+</div>
+
+{% endblock %}
