@@ -121,10 +121,41 @@
                         {% endif %}
 
                         <label for="valor">✱ Valor</label>
-                        {{ form.valor }}
+                        <div class="valor-container">
+                            {{ form.valor }}
+                            <button type="button" id="calcButton" class="calc-button">🧮</button>
+                        </div>
                         {% if form.valor.errors %}
                             <div class="error">{{ form.valor.errors }}</div>
                         {% endif %}
+                        
+                        <!-- Modal de Calculadora -->
+                        <div id="calcModal" class="modal">
+                            <div class="modal-content">
+                                <h2>Calculadora</h2>
+                                <div id="calcDisplay" class="calc-display">0</div>
+                                <div class="calc-buttons">
+                                    <button class="calc-btn" data-value="1">1</button>
+                                    <button class="calc-btn" data-value="2">2</button>
+                                    <button class="calc-btn" data-value="3">3</button>
+                                    <button class="calc-btn" data-value="+">+</button>
+                                    <button class="calc-btn" data-value="4">4</button>
+                                    <button class="calc-btn" data-value="5">5</button>
+                                    <button class="calc-btn" data-value="6">6</button>
+                                    <button class="calc-btn" data-value="-">-</button>
+                                    <button class="calc-btn" data-value="7">7</button>
+                                    <button class="calc-btn" data-value="8">8</button>
+                                    <button class="calc-btn" data-value="9">9</button>
+                                    <button class="calc-btn" data-value="*">×</button>
+                                    <button class="calc-btn" data-value="0">0</button>
+                                    <button class="calc-btn" data-value=".">.</button>
+                                    <button class="calc-btn" data-value="=">=</button>
+                                    <button class="calc-btn" data-value="/">÷</button>
+                                    <button class="calc-clear" id="calcClear">C</button>
+                                </div>
+                                <button id="calcClose" class="btn-cancel2">Fechar</button>
+                            </div>
+                        </div>
 
                         <label for="observacao_valor">Observação sobre valor</label>
                         {{ form.observacao_valor }}
@@ -275,6 +306,60 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
+
+document.addEventListener("DOMContentLoaded", function () {
+        const calcButton = document.getElementById("calcButton");
+        const calcModal = document.getElementById("calcModal");
+        const calcClose = document.getElementById("calcClose");
+        const calcDisplay = document.getElementById("calcDisplay");
+        const calcClear = document.getElementById("calcClear");
+        const valorField = document.querySelector("input[name='valor']");
+        let calcValue = "";
+
+        calcButton.addEventListener("click", function (event) {
+            event.preventDefault(); // Evita o envio do formulário
+            calcModal.style.display = "flex";
+            calcDisplay.textContent = calcValue || "0";
+        });
+
+        calcClose.addEventListener("click", function (event) {
+            event.preventDefault(); // Evita o envio do formulário
+            calcModal.style.display = "none";
+        });
+
+        document.querySelectorAll(".calc-btn").forEach(function (button) {
+            button.addEventListener("click", function (event) {
+                event.preventDefault(); // Evita o envio do formulário
+                const value = this.getAttribute("data-value");
+
+                if (value === "=") {
+                    try {
+                        calcValue = eval(calcValue).toString();
+                        calcDisplay.textContent = calcValue;
+                        valorField.value = calcValue;
+                    } catch {
+                        calcDisplay.textContent = "Erro";
+                    }
+                } else {
+                    calcValue += value;
+                    calcDisplay.textContent = calcValue;
+                }
+            });
+        });
+
+        calcClear.addEventListener("click", function (event) {
+            event.preventDefault(); // Evita o envio do formulário
+            calcValue = "";
+            calcDisplay.textContent = "0";
+        });
+
+        window.onclick = function(event) {
+            if (event.target === calcModal) {
+                calcModal.style.display = "none";
+            }
+        };
+    });
+
 
     document.addEventListener("DOMContentLoaded", function () {
         const saveButton = document.querySelector(".btn-save");

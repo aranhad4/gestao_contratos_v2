@@ -62,19 +62,30 @@
                     <tr>
                         <th>Tipo de Anexo</th>
                         <th>Arquivo</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Contrato anexadas</td>
+                        <td>Contrato anexado</td>
+                        <td>{{ contrato.contrato_file.name }}</td>
                         <td>
-                            {{ contrato.contrato_file }}
+                            {% if contrato.contrato_file %}
+                                <a href="{{ contrato.contrato_file.url }}" target="_blank" class="view-button">Visualizar</a>
+                            {% else %}
+                                <p>Sem anexo</p>
+                            {% endif %}
                         </td>
                     </tr>
                     <tr>
-                        <td>Imagem anexadas</td>
+                        <td>Imagem anexada</td>
+                        <td>{{ contrato.imagem.name }}</td>
                         <td>
-                            {{ contrato.imagem }}
+                            {% if contrato.imagem %}
+                                <a href="{{ contrato.imagem.url }}" target="_blank" class="view-button">Visualizar</a>
+                            {% else %}
+                                <p>Sem anexo</p>
+                            {% endif %}
                         </td>
                     </tr>
                 </tbody>
@@ -84,24 +95,29 @@
         <!-- Aba de Distrato -->
         <div class="tab-content" id="distrato">
             <h2>Distratos</h2>
-            {{ contrato.observacao_distrato }}
-                <table class="anexos-table">
-                    <thead>
-                        <tr>
-                            <th>Tipo de Anexo</th>
-                            <th>Arquivo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Distratos anexados</td>
-                            <td>
-                                {{ contrato.anexo_distrato }}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <p>{{ contrato.observacao_distrato }}</p>
+            <table class="anexos-table">
+                <thead>
+                    <tr>
+                        <th>Tipo de Anexo</th>
+                        <th>Arquivo</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Distrato anexado</td>
+                        <td>{{ contrato.anexo_distrato.name }}</td>
+                        <td>
+                            {% if contrato.anexo_distrato %}
+                                <a href="{{ contrato.anexo_distrato.url }}" target="_blank" class="view-button">Visualizar</a>
+                            {% else %}
+                                <p>Sem anexo</p>
+                            {% endif %}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
     <footer>
